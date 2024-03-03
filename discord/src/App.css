@@ -1,0 +1,61 @@
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+.darkest-black {
+  background-color: #1e2124;
+}
+
+.second-darkest-black {
+  background-color: #282b30;
+}
+
+.second-lightest-black {
+  background-color: #36393e;
+}
+
+.lightest-black {
+  background-color: #424549;
+}
+
+.message-input {
+  background-color: #4d5153;
+  color: rgb(172, 173, 176);
+}
+
+.white-text {
+  color: white;
+}
+
+.light-grey-text {
+  color: rgb(218, 218, 218);
+}
+
+.grey-text {
+  color: rgb(182, 182, 182);
+}
+
+.friend-hover:hover {
+  background-color: #2c3033;
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.scrollbar-hidden {
+  scrollbar-width: none;
+}
