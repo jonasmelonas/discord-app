@@ -12,6 +12,7 @@ function App() {
     ["001", {name: "Hedda", userId: "001"}],
     ["002", {name: "Grete", userId: "002"}],
     ["003", {name: "Hans", userId: "003"}],
+    ["004", {name: "Karin", userId: "004"}],
   ]));
 
   const [chosenUser, setChosenUser] = useState(usersMap.get("001")!)
@@ -62,6 +63,22 @@ function App() {
           date: new Date(),
           user: "them" 
         }]
+    ],
+    [
+      "004", [
+        {
+          text: "Can I tell you a secret?",
+          date: new Date(),
+          user: "them" }, 
+        {
+          text: "I'm gayer than a gay bar.",
+          date: new Date(),
+          user: "them" }, 
+        {
+          text: "Now you know my deepest secret...",
+          date: new Date(),
+          user: "them" 
+        }]
     ]]));
 
   function handleSendMessage(message: Message) {
@@ -76,6 +93,34 @@ function App() {
     setChosenUser(usersMap.get(userId)!)
   }
 
+  function handleDeleteChat(userId: string) {
+    console.log("sletter chat")
+    setUsers(prevUsers => {
+      const newMap = prevUsers;
+      newMap.delete(userId)
+      return newMap;
+    })
+    if(chosenUser.userId === userId) {
+      var newChosenUser: User
+      setChosenUser(() => {
+        Array.from(usersMap.entries()).every(([key, value]) => {
+          if(value !== undefined) {
+            newChosenUser = value;
+            return false;
+          }
+        })
+        return newChosenUser;
+      })
+    }
+    setMessageMap(prevMap => {
+      const newMap = prevMap;
+      newMap.delete(userId)
+      return newMap;
+    })
+
+
+  }
+
   return (
     <div className="size-full max-w-full flex">
       <ServerNavBar />
@@ -83,7 +128,8 @@ function App() {
         usersMap={usersMap} 
         chosenUser={chosenUser} 
         messagesMap={messagesMap} 
-        handleChooseUser={handleChooseUser} />
+        handleChooseUser={handleChooseUser} 
+        handleDeleteChat={handleDeleteChat}/>
       <MiddleRightSection
         usersMap={usersMap} 
         chosenUser={chosenUser} 

@@ -40,7 +40,7 @@ function MessageChat(props : MessageChatProps) {
     useEffect(() => {
         console.log("update")
         scrollToBottom();
-    }, [props.messagesMap.get(props.chosenUser.userId)!.length]);
+    }, [props.messagesMap.get(props.chosenUser!.userId)!.length]);
 
     return (
         <div className="messages-div h-full flex flex-col flex-grow overflow-y-auto scrollbar-hidden second-lightest-black">

@@ -8,6 +8,7 @@ type FriendsChatListProps = {
     chosenUser: User
     messagesMap: Map<string, Message[]>
     handleChooseUser: (userId: string) => void
+    handleDeleteChat: (userId: string) => void
 }
 
 function FriendsChatList(props: FriendsChatListProps) {
@@ -29,13 +30,20 @@ function FriendsChatList(props: FriendsChatListProps) {
                                 <div 
                                     key={friend.userId} 
                                     onClick={() => props.handleChooseUser(friend.userId)!} 
-                                    className={`friend-hover rounded w-full h-full flex items-center pl-2 
+                                    className={`friend-hover rounded w-full h-full flex justify-between items-center pl-2 
                                         ${props.chosenUser.userId === friend.userId ? "message-input white-text p-3" : "grey-text"}
                                         `} >
-                                    <img src={img} className="size-8 rounded-full" alt={friend.name}/>
-                                    <p className="ml-2">
-                                        <b>{friend.name}</b>
-                                    </p>
+                                    <div className="flex h-full items-center justify-start">
+                                        <img src={img} className="size-8 rounded-full" alt={friend.name}/>
+                                        <p className="ml-2">
+                                            <b>{friend.name}</b>
+                                        </p>
+                                    </div>
+                                    <div onClick={() => props.handleDeleteChat(friend.userId)}>
+                                        <p onClick={() => props.handleDeleteChat(friend.userId)} className={`${props.chosenUser.userId === friend.userId ? "delete-msg-focused" : "delete-msg-unfocused p-3"}`}>
+                                            x
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                             <div className="w-full">
@@ -46,8 +54,12 @@ function FriendsChatList(props: FriendsChatListProps) {
                     })}
                 </div>
             </div>
-            <div className='h-16 w-full mb-0'>
-
+            <div className='h-16 w-full mb-0 flex items-center pl-2'>
+                <img src={img} className="size-8 rounded-full"/>
+                <div className="flex flex-col justify-center ml-2 my-2">
+                    <p className="white-text"><b>Jonas</b></p>
+                    <p className="grey-text font-thin">no</p>
+                </div>
             </div>
         </div>
     )
