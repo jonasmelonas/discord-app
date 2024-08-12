@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import img from "../img/discord-icon.png"
 import Message from "../models/Message";
 import User from "../models/User";
@@ -12,9 +13,15 @@ type FriendsChatListProps = {
 }
 
 function FriendsChatList(props: FriendsChatListProps) {
-    const friends = Array.from(props.usersMap.entries()).map(([key, user]) => {
+    var friends = Array.from(props.usersMap.entries()).map(([key, user]) => {
         return user;
     })
+    
+    useEffect(() => {
+        friends = Array.from(props.usersMap.entries()).map(([key, user]) => {
+            return user;
+        })
+    }, [props.usersMap])
 
     return (
         <div className='h-full max-h-full min-w-60 w-60 flex flex-col second-darkest-black'>
@@ -39,7 +46,7 @@ function FriendsChatList(props: FriendsChatListProps) {
                                             <b>{friend.name}</b>
                                         </p>
                                     </div>
-                                    <div onClick={() => props.handleDeleteChat(friend.userId)}>
+                                    <div>
                                         <p onClick={() => props.handleDeleteChat(friend.userId)} className={`${props.chosenUser.userId === friend.userId ? "delete-msg-focused" : "delete-msg-unfocused p-3"}`}>
                                             x
                                         </p>

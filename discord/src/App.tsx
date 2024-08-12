@@ -90,7 +90,10 @@ function App() {
   }
 
   function handleChooseUser(userId: string) {
-    setChosenUser(usersMap.get(userId)!)
+    console.log("handleChooseUser.. " + userId)
+    if(usersMap.has(userId)) {
+      setChosenUser(usersMap.get(userId)!)
+    }
   }
 
   function handleDeleteChat(userId: string) {
@@ -104,13 +107,17 @@ function App() {
       var newChosenUser: User
       setChosenUser(() => {
         Array.from(usersMap.entries()).every(([key, value]) => {
-          if(value !== undefined) {
+          if(value.userId !== userId) {
             newChosenUser = value;
+            console.log("ny chosenUser:" + newChosenUser.userId + newChosenUser.name)
+            console.log(usersMap.size)
             return false;
           }
         })
         return newChosenUser;
       })
+      console.log("test")
+      console.log(chosenUser)
     }
     setMessageMap(prevMap => {
       const newMap = prevMap;
@@ -124,12 +131,14 @@ function App() {
   return (
     <div className="size-full max-w-full flex">
       <ServerNavBar />
+
       <FriendsChatList 
         usersMap={usersMap} 
         chosenUser={chosenUser} 
         messagesMap={messagesMap} 
         handleChooseUser={handleChooseUser} 
         handleDeleteChat={handleDeleteChat}/>
+
       <MiddleRightSection
         usersMap={usersMap} 
         chosenUser={chosenUser} 
